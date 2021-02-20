@@ -1,6 +1,7 @@
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.EventQueue
+import java.awt.event.ItemEvent
 import javax.swing.*
 import javax.swing.SwingConstants.LEADING
 import kotlin.system.exitProcess
@@ -31,12 +32,25 @@ class Main(title: String) : JFrame() {
         }
         closeButton.addActionListener { exitProcess(0) }
 
-        createLayout(labels, closeButton)
+        val checkBox = JCheckBox("Show title", true)
+
+        checkBox.addItemListener { e ->
+            val sel: Int = e.stateChange
+            if (sel == ItemEvent.SELECTED) {
+                setTitle("JCheckBox")
+            } else {
+                setTitle("")
+            }
+        }
+
+        createLayout(labels, closeButton, checkBox)
 
         setTitle(title)
 
+
+
         defaultCloseOperation = EXIT_ON_CLOSE
-        setSize(800, 500)
+        setSize(1000, 500)
         setLocationRelativeTo(null)
     }
 
@@ -57,14 +71,15 @@ class Main(title: String) : JFrame() {
             .addGroup(gl.createSequentialGroup()
                 .addComponent(labels[4])
                 .addComponent(labels[5])
+                .addComponent(arg[0])
                 .addComponent(labels[6])
                 .addComponent(labels[7])
                 .addComponent(labels[8])
                 .addComponent(labels[9])
-                .addComponent(labels[10])
-                .addComponent(labels[11]))
+                .addComponent(labels[11])
+                .addComponent(labels[10]))
             .addComponent(labels[12])
-            .addComponent(arg[0])
+            .addComponent(arg[1])
         )
 
         gl.setVerticalGroup(gl.createSequentialGroup()
@@ -76,14 +91,15 @@ class Main(title: String) : JFrame() {
             .addGroup(gl.createParallelGroup()
                 .addComponent(labels[4])
                 .addComponent(labels[5])
+                .addComponent(arg[0])
                 .addComponent(labels[6])
                 .addComponent(labels[7])
                 .addComponent(labels[8])
                 .addComponent(labels[9])
-                .addComponent(labels[10])
-                .addComponent(labels[11]))
+                .addComponent(labels[11])
+                .addComponent(labels[10]))
             .addComponent(labels[12])
-            .addComponent(arg[0])
+            .addComponent(arg[1])
         )
 
         pack()
