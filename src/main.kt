@@ -43,7 +43,9 @@ class Main(title: String) : JFrame() {
             }
         }
 
-        createLayout(labels, closeButton, checkBox)
+        val imageLabel = JLabel(ImageIcon("src/resources/images.png"))
+
+        createLayout(labels, closeButton, checkBox, imageLabel)
 
         setTitle(title)
 
@@ -64,6 +66,8 @@ class Main(title: String) : JFrame() {
 
         gl.setHorizontalGroup(gl.createParallelGroup()
             .addGroup(gl.createSequentialGroup()
+                .addComponent(arg[2]))
+            .addGroup(gl.createSequentialGroup()
                 .addComponent(labels[0])
                 .addComponent(labels[1])
                 .addComponent(labels[2])
@@ -83,6 +87,8 @@ class Main(title: String) : JFrame() {
         )
 
         gl.setVerticalGroup(gl.createSequentialGroup()
+            .addGroup(gl.createParallelGroup()
+                .addComponent(arg[2]))
             .addGroup(gl.createParallelGroup()
                 .addComponent(labels[0])
                 .addComponent(labels[1])
