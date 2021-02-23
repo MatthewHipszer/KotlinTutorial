@@ -1,10 +1,13 @@
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.EventQueue
+import java.awt.event.ActionEvent
 import java.awt.event.ItemEvent
+import java.awt.event.KeyEvent
 import javax.swing.*
 import javax.swing.SwingConstants.LEADING
 import kotlin.system.exitProcess
+
 
 class Main(title: String) : JFrame() {
 
@@ -14,9 +17,11 @@ class Main(title: String) : JFrame() {
 
     private fun createUI(title: String) {
 
-        val colorArray = arrayOf<Color>(Color.black, Color.blue, Color.cyan,
+        val colorArray = arrayOf<Color>(
+            Color.black, Color.blue, Color.cyan,
             Color.darkGray, Color.gray, Color.green, Color.lightGray, Color.magenta,
-            Color.orange, Color.pink, Color.red, Color.white, Color.yellow)
+            Color.orange, Color.pink, Color.red, Color.white, Color.yellow
+        )
 
         val labels = colorArray.map {
             JLabel("", null, LEADING).apply {
@@ -49,6 +54,7 @@ class Main(title: String) : JFrame() {
 
         setTitle(title)
 
+        createMenuBar()
 
 
         defaultCloseOperation = EXIT_ON_CLOSE
@@ -64,51 +70,85 @@ class Main(title: String) : JFrame() {
         gl.autoCreateContainerGaps = true
         gl.autoCreateGaps = true
 
-        gl.setHorizontalGroup(gl.createParallelGroup()
-            .addGroup(gl.createSequentialGroup()
-                .addComponent(arg[2]))
-            .addGroup(gl.createSequentialGroup()
-                .addComponent(labels[0])
-                .addComponent(labels[1])
-                .addComponent(labels[2])
-                .addComponent(labels[3]))
-            .addGroup(gl.createSequentialGroup()
-                .addComponent(labels[4])
-                .addComponent(labels[5])
-                .addComponent(arg[0])
-                .addComponent(labels[6])
-                .addComponent(labels[7])
-                .addComponent(labels[8])
-                .addComponent(labels[9])
-                .addComponent(labels[11])
-                .addComponent(labels[10]))
-            .addComponent(labels[12])
-            .addComponent(arg[1])
+        gl.setHorizontalGroup(
+            gl.createParallelGroup()
+                .addGroup(
+                    gl.createSequentialGroup()
+                        .addComponent(arg[2])
+                )
+                .addGroup(
+                    gl.createSequentialGroup()
+                        .addComponent(labels[0])
+                        .addComponent(labels[1])
+                        .addComponent(labels[2])
+                        .addComponent(labels[3])
+                )
+                .addGroup(
+                    gl.createSequentialGroup()
+                        .addComponent(labels[4])
+                        .addComponent(labels[5])
+                        .addComponent(arg[0])
+                        .addComponent(labels[6])
+                        .addComponent(labels[7])
+                        .addComponent(labels[8])
+                        .addComponent(labels[9])
+                        .addComponent(labels[11])
+                        .addComponent(labels[10])
+                )
+                .addComponent(labels[12])
+                .addComponent(arg[1])
         )
 
-        gl.setVerticalGroup(gl.createSequentialGroup()
-            .addGroup(gl.createParallelGroup()
-                .addComponent(arg[2]))
-            .addGroup(gl.createParallelGroup()
-                .addComponent(labels[0])
-                .addComponent(labels[1])
-                .addComponent(labels[2])
-                .addComponent(labels[3]))
-            .addGroup(gl.createParallelGroup()
-                .addComponent(labels[4])
-                .addComponent(labels[5])
-                .addComponent(arg[0])
-                .addComponent(labels[6])
-                .addComponent(labels[7])
-                .addComponent(labels[8])
-                .addComponent(labels[9])
-                .addComponent(labels[11])
-                .addComponent(labels[10]))
-            .addComponent(labels[12])
-            .addComponent(arg[1])
+        gl.setVerticalGroup(
+            gl.createSequentialGroup()
+                .addGroup(
+                    gl.createParallelGroup()
+                        .addComponent(arg[2])
+                )
+                .addGroup(
+                    gl.createParallelGroup()
+                        .addComponent(labels[0])
+                        .addComponent(labels[1])
+                        .addComponent(labels[2])
+                        .addComponent(labels[3])
+                )
+                .addGroup(
+                    gl.createParallelGroup()
+                        .addComponent(labels[4])
+                        .addComponent(labels[5])
+                        .addComponent(arg[0])
+                        .addComponent(labels[6])
+                        .addComponent(labels[7])
+                        .addComponent(labels[8])
+                        .addComponent(labels[9])
+                        .addComponent(labels[11])
+                        .addComponent(labels[10])
+                )
+                .addComponent(labels[12])
+                .addComponent(arg[1])
         )
 
         pack()
+    }
+
+
+    private fun createMenuBar() {
+
+        val menuBar = JMenuBar()
+        val icon = ImageIcon("src/resources/exit.png")
+
+        val file = JMenu("File")
+        file.mnemonic = KeyEvent.VK_F
+
+        val eMenuItem = JMenuItem("Exit", icon)
+        eMenuItem.mnemonic = KeyEvent.VK_E
+        eMenuItem.toolTipText = "Exit application"
+        eMenuItem.addActionListener { _: ActionEvent -> exitProcess(0) }
+
+        file.add(eMenuItem)
+        menuBar.add(file)
+
+        jMenuBar = menuBar
     }
 }
 
